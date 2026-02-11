@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Visitrack.es - Control de Visitas Comerciales</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0f766e", // Emerald-700
+                        secondary: "#1e3a8a", // Blue-900
+                        "background-light": "#ffffff",
+                        "background-dark": "#0f172a",
+                        "surface-light": "#f3f4f6",
+                        "surface-dark": "#1e293b",
+                        "text-light": "#1f2937",
+                        "text-dark": "#f1f5f9",
+                        "muted-light": "#6b7280",
+                        "muted-dark": "#94a3b8",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                        display: ["Playfair Display", "serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        'xl': "1rem",
+                        '2xl': "1.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .whatsapp-bubble-in {
+            background-color: #fff;
+            border-radius: 0 12px 12px 12px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .whatsapp-bubble-out {
+            background-color: #dcf8c6;
+            border-radius: 12px 0 12px 12px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .whatsapp-bubble-in {
+            background-color: #334155;
+            color: white;
+        }
+
+        .dark .whatsapp-bubble-out {
+            background-color: #059669;
+            color: white;
+        }
+
+        .serif-italic {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-sans transition-colors duration-300 antialiased selection:bg-primary selection:text-white">
+    <nav
+        class="fixed w-full z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="material-icons-outlined text-primary text-3xl">smart_toy</span>
+                    <span class="font-bold text-xl tracking-tight">Visitrack<span class="text-primary">.es</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#problema">El Problema</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#solucion">Solución</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#como-funciona">Cómo
+                        funciona</a>
+                    <button
+                        class="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-opacity-90 transition-all shadow-lg shadow-primary/20">
+                        Agendar Demo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden relative">
+        <div
+            class="absolute top-0 right-0 -z-10 w-1/2 h-full bg-gradient-to-l from-emerald-50 to-transparent dark:from-emerald-900/10 dark:to-transparent opacity-50">
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="space-y-8">
+                    <div
+                        class="inline-flex items-center space-x-2 bg-surface-light dark:bg-surface-dark px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">
+                        <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span
+                            class="text-xs font-medium text-muted-light dark:text-muted-dark uppercase tracking-wide">Nuevo:
+                            Integración CRM</span>
+                    </div>
+                    <h1 class="text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]">
+                        Controla las visitas de tu equipo <span
+                            class="serif-italic font-normal text-primary">comercial</span> en tiempo real.
+                    </h1>
+                    <p class="text-xl text-muted-light dark:text-muted-dark leading-relaxed max-w-lg">
+                        Olvídate de perseguir a tus vendedores para que reporten. Nuestro bot captura los datos de
+                        visita vía WhatsApp y los estructura en tu CRM automáticamente.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center space-x-3 text-muted-light dark:text-muted-dark">
+                            <span class="material-icons-outlined text-primary">check_circle</span>
+                            <span>Sin apps complejas, todo por WhatsApp</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-muted-light dark:text-muted-dark">
+                            <span class="material-icons-outlined text-primary">check_circle</span>
+                            <span>Geolocalización automática de visitas</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-muted-light dark:text-muted-dark">
+                            <span class="material-icons-outlined text-primary">check_circle</span>
+                            <span>Transcripción de notas de voz a texto</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-muted-light dark:text-muted-dark">
+                            <span class="material-icons-outlined text-primary">check_circle</span>
+                            <span>Análisis de sentimiento del cliente</span>
+                        </li>
+                    </ul>
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                        <button
+                            class="bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold shadow-xl shadow-primary/25 hover:scale-105 transition-transform duration-200 flex items-center justify-center space-x-2">
+                            <span>Quiero probarlo</span>
+                            <span class="material-icons-outlined text-sm">arrow_forward</span>
+                        </button>
+                        <button
+                            class="bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 text-text-light dark:text-text-dark px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex items-center justify-center space-x-2">
+                            <span class="material-icons-outlined">play_circle_outline</span>
+                            <span>Ver video</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div
+                        class="absolute -top-10 -right-10 w-64 h-64 bg-secondary/10 dark:bg-secondary/30 rounded-full blur-3xl">
+                    </div>
+                    <div
+                        class="absolute -bottom-10 -left-10 w-64 h-64 bg-primary/10 dark:bg-primary/30 rounded-full blur-3xl">
+                    </div>
+                    <div
+                        class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-2xl overflow-hidden ring-1 ring-gray-900/5">
+                        <div class="h-[32px] w-[3px] bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
+                        <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+                        <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+                        <div
+                            class="rounded-[2rem] overflow-hidden w-full h-full bg-[#ECE5DD] dark:bg-gray-900 relative flex flex-col">
+                            <div
+                                class="bg-[#075E54] dark:bg-gray-800 p-4 pt-8 text-white flex items-center space-x-3 shadow-md z-10">
+                                <span class="material-icons-outlined">arrow_back</span>
+                                <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                                    <span class="material-icons-outlined text-sm">smart_toy</span>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-bold text-sm">Visitrack.es</p>
+                                    <p class="text-[10px] opacity-80">En línea</p>
+                                </div>
+                            </div>
+                            <div class="flex-1 p-3 overflow-y-auto space-y-4 text-xs">
+                                <div class="text-center text-[10px] text-gray-500 my-2">HOY</div>
+                                <div class="flex justify-end">
+                                    <div class="whatsapp-bubble-out p-3 max-w-[85%] relative">
+                                        <p class="text-text-light dark:text-white">Acabo de salir de Manufacturas López.
+                                            Reunión con Carlos (Gerente). Están interesados en el plan Premium pero
+                                            piden descuento del 10% por volumen. Cierra para el viernes.</p>
+                                        <div
+                                            class="text-[9px] text-gray-500 dark:text-gray-300 text-right mt-1 flex items-center justify-end space-x-1">
+                                            <span>10:42 AM</span>
+                                            <span
+                                                class="material-icons-outlined text-[10px] text-blue-500">done_all</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-start">
+                                    <div class="whatsapp-bubble-in p-3 max-w-[90%]">
+                                        <p class="font-bold text-primary mb-1">Visita registrada ✅</p>
+                                        <div class="bg-gray-100 dark:bg-gray-700 rounded p-2 mb-2 space-y-1">
+                                            <div
+                                                class="flex justify-between border-b border-gray-200 dark:border-gray-600 pb-1">
+                                                <span class="text-gray-500 dark:text-gray-400">Cliente:</span>
+                                                <span class="font-medium text-text-light dark:text-white">Manufacturas
+                                                    López</span>
+                                            </div>
+                                            <div
+                                                class="flex justify-between border-b border-gray-200 dark:border-gray-600 pb-1">
+                                                <span class="text-gray-500 dark:text-gray-400">Contacto:</span>
+                                                <span class="font-medium text-text-light dark:text-white">Carlos
+                                                    (Gerente)</span>
+                                            </div>
+                                            <div
+                                                class="flex justify-between border-b border-gray-200 dark:border-gray-600 pb-1">
+                                                <span class="text-gray-500 dark:text-gray-400">Oportunidad:</span>
+                                                <span class="font-medium text-text-light dark:text-white">Plan
+                                                    Premium</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-gray-500 dark:text-gray-400">Estado:</span>
+                                                <span class="font-medium text-orange-500">Negociación (10% desc)</span>
+                                            </div>
+                                        </div>
+                                        <p class="text-text-light dark:text-white">He actualizado el CRM y programado un
+                                            recordatorio para el jueves. ¿Algo más?</p>
+                                        <div class="text-[9px] text-gray-400 text-right mt-1">10:42 AM</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-2 bg-gray-100 dark:bg-gray-800 flex items-center space-x-2">
+                                <div
+                                    class="flex-1 bg-white dark:bg-gray-700 h-9 rounded-full px-3 flex items-center text-gray-400 text-xs">
+                                    Escribe un mensaje...
+                                </div>
+                                <div
+                                    class="w-9 h-9 bg-[#075E54] rounded-full flex items-center justify-center text-white shadow-sm">
+                                    <span class="material-icons-outlined text-sm">mic</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-20 bg-surface-light dark:bg-surface-dark" id="problema">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-4">¿Por qué el reporte comercial es un <span
+                        class="serif-italic font-normal text-red-500">dolor de cabeza</span>?</h2>
+                <p class="text-muted-light dark:text-muted-dark text-lg">Los CRM son potentes, pero llenarlos toma
+                    tiempo que tus vendedores prefieren usar para vender.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div
+                    class="bg-white dark:bg-background-dark p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div
+                        class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center mb-6">
+                        <span class="material-icons-outlined text-red-600 dark:text-red-400">visibility_off</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Falta de Control</h3>
+                    <p class="text-sm text-muted-light dark:text-muted-dark leading-relaxed">No sabes si las visitas
+                        realmente ocurrieron o si son solo llamadas.</p>
+                </div>
+                <div
+                    class="bg-white dark:bg-background-dark p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div
+                        class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mb-6">
+                        <span class="material-icons-outlined text-orange-600 dark:text-orange-400">history</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Datos Atrasados</h3>
+                    <p class="text-sm text-muted-light dark:text-muted-dark leading-relaxed">Los reportes llegan el
+                        viernes a última hora, cuando ya es tarde para actuar.</p>
+                </div>
+                <div
+                    class="bg-white dark:bg-background-dark p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div
+                        class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-6">
+                        <span class="material-icons-outlined text-blue-600 dark:text-blue-400">description</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Poca Información</h3>
+                    <p class="text-sm text-muted-light dark:text-muted-dark leading-relaxed">"Visita realizada" no te
+                        dice nada sobre las objeciones o necesidades.</p>
+                </div>
+                <div
+                    class="bg-white dark:bg-background-dark p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div
+                        class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mb-6">
+                        <span
+                            class="material-icons-outlined text-purple-600 dark:text-purple-400">sentiment_dissatisfied</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Fricción CRM</h3>
+                    <p class="text-sm text-muted-light dark:text-muted-dark leading-relaxed">Tus comerciales odian abrir
+                        la laptop y llenar formularios infinitos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-background-light dark:bg-background-dark overflow-hidden" id="solucion">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <div
+                        class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-primary uppercase bg-primary/10 rounded-full">
+                        Inteligencia Artificial</div>
+                    <h2 class="text-4xl font-bold mb-6">De notas de voz desordenadas a <span
+                            class="serif-italic font-normal text-primary">datos estructurados</span>.</h2>
+                    <p class="text-lg text-muted-light dark:text-muted-dark mb-8">
+                        Nuestra IA entiende el contexto, extrae las entidades importantes (fechas, montos, nombres) y
+                        actualiza tu base de datos sin intervención humana.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div
+                                class="flex-shrink-0 w-10 h-10 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center border border-gray-200 dark:border-gray-700">
+                                <span class="material-icons-outlined text-primary">record_voice_over</span>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-lg">Procesamiento de Voz Natural</h4>
+                                <p class="text-sm text-muted-light dark:text-muted-dark mt-1">El comercial habla como si
+                                    le contara a un colega. La IA se encarga del resto.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div
+                                class="flex-shrink-0 w-10 h-10 rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center border border-gray-200 dark:border-gray-700">
+                                <span class="material-icons-outlined text-primary">table_chart</span>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-lg">Mapeo Automático de Campos</h4>
+                                <p class="text-sm text-muted-light dark:text-muted-dark mt-1">Asocia la información a
+                                    los campos correctos de tu CRM (HubSpot, Salesforce, Pipedrive).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-blue-500 to-teal-500 rounded-3xl blur opacity-20 group-hover:opacity-30 transition-opacity">
+                    </div>
+                    <div
+                        class="relative bg-surface-light dark:bg-surface-dark rounded-3xl p-2 border border-gray-200 dark:border-gray-700">
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg">
+                            <div
+                                class="bg-gray-50 dark:bg-gray-900 px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                                </div>
+                                <span class="text-xs font-mono text-gray-400">AI Data Transformation</span>
+                            </div>
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-gray-100 dark:divide-gray-700">
+                                <div class="p-6">
+                                    <span
+                                        class="text-xs font-bold text-red-500 uppercase mb-4 block tracking-wide">Input
+                                        (Voz/Texto)</span>
+                                    <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 relative">
+                                        <div
+                                            class="absolute -left-2 top-4 w-0 h-0 border-t-[8px] border-t-transparent border-r-[10px] border-r-gray-100 dark:border-r-gray-700 border-b-[8px] border-b-transparent">
+                                        </div>
+                                        <p
+                                            class="text-sm italic text-gray-600 dark:text-gray-300 font-serif leading-relaxed">
+                                            "Ayer visité a la gente de <strong>TechSolutions</strong>. Hablé con
+                                            <strong>Ana María</strong>. Le gustó la demo pero dice que el precio de
+                                            <strong>$5,000</strong> se les va de presupuesto. Quedamos en hablar el
+                                            <strong>próximo martes</strong>."
+                                        </p>
+                                    </div>
+                                    <div class="mt-4 flex items-center justify-center text-gray-400">
+                                        <span class="material-icons-outlined animate-bounce">arrow_downward</span>
+                                    </div>
+                                </div>
+                                <div class="p-6 bg-blue-50/50 dark:bg-blue-900/10">
+                                    <span
+                                        class="text-xs font-bold text-primary uppercase mb-4 block tracking-wide">Output
+                                        (CRM Data)</span>
+                                    <div class="space-y-3">
+                                        <div
+                                            class="bg-white dark:bg-gray-900 p-3 rounded shadow-sm border border-gray-100 dark:border-gray-700">
+                                            <p class="text-[10px] text-gray-400 uppercase">Empresa</p>
+                                            <p class="font-medium text-sm">TechSolutions Inc.</p>
+                                        </div>
+                                        <div
+                                            class="bg-white dark:bg-gray-900 p-3 rounded shadow-sm border border-gray-100 dark:border-gray-700">
+                                            <p class="text-[10px] text-gray-400 uppercase">Contacto</p>
+                                            <p class="font-medium text-sm">Ana María</p>
+                                        </div>
+                                        <div
+                                            class="bg-white dark:bg-gray-900 p-3 rounded shadow-sm border border-gray-100 dark:border-gray-700 flex justify-between">
+                                            <div>
+                                                <p class="text-[10px] text-gray-400 uppercase">Objeción</p>
+                                                <p class="font-medium text-sm text-red-500">Precio</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-[10px] text-gray-400 uppercase">Valor</p>
+                                                <p class="font-medium text-sm">$5,000</p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="bg-white dark:bg-gray-900 p-3 rounded shadow-sm border border-gray-100 dark:border-gray-700">
+                                            <p class="text-[10px] text-gray-400 uppercase">Próximo paso</p>
+                                            <div class="flex items-center text-sm font-medium text-primary">
+                                                <span class="material-icons-outlined text-sm mr-1">event</span>
+                                                Próximo Martes
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-20 bg-surface-light dark:bg-surface-dark" id="como-funciona">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold">Cómo funciona</h2>
+                <div class="h-1 w-20 bg-primary mx-auto mt-4 rounded-full"></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 mx-auto bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300 border-2 border-transparent group-hover:border-primary">
+                        <span
+                            class="material-icons-outlined text-4xl text-gray-400 group-hover:text-primary transition-colors">chat</span>
+                    </div>
+                    <div class="inline-block bg-primary text-white text-xs font-bold px-2 py-1 rounded mb-3">PASO 1
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Envía un mensaje</h3>
+                    <p class="text-muted-light dark:text-muted-dark text-sm px-6">El comercial envía una nota de voz o
+                        texto al número de WhatsApp del bot al salir de la visita.</p>
+                </div>
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 mx-auto bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300 border-2 border-transparent group-hover:border-primary">
+                        <span
+                            class="material-icons-outlined text-4xl text-gray-400 group-hover:text-primary transition-colors">psychology</span>
+                    </div>
+                    <div class="inline-block bg-primary text-white text-xs font-bold px-2 py-1 rounded mb-3">PASO 2
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">La IA procesa</h3>
+                    <p class="text-muted-light dark:text-muted-dark text-sm px-6">El bot transcribe, analiza, extrae los
+                        datos clave y detecta tareas pendientes o alertas.</p>
+                </div>
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 mx-auto bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300 border-2 border-transparent group-hover:border-primary">
+                        <span
+                            class="material-icons-outlined text-4xl text-gray-400 group-hover:text-primary transition-colors">sync_alt</span>
+                    </div>
+                    <div class="inline-block bg-primary text-white text-xs font-bold px-2 py-1 rounded mb-3">PASO 3
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Sync &amp; Dashboard</h3>
+                    <p class="text-muted-light dark:text-muted-dark text-sm px-6">Los datos aparecen mágicamente en tu
+                        CRM y en el dashboard de métricas en tiempo real.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-background-light dark:bg-background-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div
+                    class="bg-surface-light dark:bg-surface-dark p-10 rounded-3xl border border-gray-100 dark:border-gray-800 relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-secondary/10 dark:bg-secondary/20 rounded-bl-full -mr-8 -mt-8">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 flex items-center">
+                        <span class="material-icons-outlined mr-2 text-secondary">business</span>
+                        Para la Empresa
+                    </h3>
+                    <p class="text-muted-light dark:text-muted-dark mb-8 text-sm">Control total y datos fiables para
+                        tomar decisiones.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="material-icons-outlined text-secondary mr-3 mt-0.5 text-lg">check</span>
+                            <span class="text-sm font-medium">Visibilidad 100% de la actividad en calle</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons-outlined text-secondary mr-3 mt-0.5 text-lg">check</span>
+                            <span class="text-sm font-medium">CRM siempre actualizado y limpio</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons-outlined text-secondary mr-3 mt-0.5 text-lg">check</span>
+                            <span class="text-sm font-medium">Detección temprana de oportunidades perdidas</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons-outlined text-secondary mr-3 mt-0.5 text-lg">check</span>
+                            <span class="text-sm font-medium">Estandarización del proceso de reporte</span>
+                        </li>
+                    </ul>
+                </div>
+                <div
+                    class="bg-surface-light dark:bg-surface-dark p-10 rounded-3xl border border-gray-100 dark:border-gray-800 relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-primary/10 dark:bg-primary/20 rounded-bl-full -mr-8 -mt-8">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 flex items-center">
+                        <span class="material-icons-outlined mr-2 text-primary">person</span>
+                        Para el Comercial
+                    </h3>
+                    <p class="text-muted-light dark:text-muted-dark mb-8 text-sm">Menos burocracia, más tiempo para
+                        vender.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="material-icons-outlined text-primary mr-3 mt-0.5 text-lg">check</span>
+                            <span class="text-sm font-medium">Ahorra 1 hora diaria de trabajo administrativo</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons-outlined text-primary mr-3 mt-0.5 text-lg">check</span>
+                            <span class="text-sm font-medium">Reporta desde el coche en 30 segundos</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons-outlined text-primary mr-3 mt-0.5 text-lg">check</span>
+                            <span class="text-sm font-medium">Recordatorios automáticos de seguimiento</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="material-icons-outlined text-primary mr-3 mt-0.5 text-lg">check</span>
+                            <span class="text-sm font-medium">Interfaz familiar (WhatsApp) sin curva de
+                                aprendizaje</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-20 bg-surface-light dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">KPIs que importan</h2>
+                    <p class="text-muted-light dark:text-muted-dark">Visualiza el rendimiento de tu equipo al instante.
+                    </p>
+                </div>
+                <div
+                    class="mt-4 md:mt-0 flex items-center space-x-2 text-sm text-primary font-medium cursor-pointer hover:underline">
+                    <span>Ver dashboard completo</span>
+                    <span class="material-icons-outlined text-sm">arrow_forward</span>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div
+                    class="bg-white dark:bg-background-dark p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg text-blue-600 dark:text-blue-400">
+                            <span class="material-icons-outlined">trending_up</span>
+                        </div>
+                        <span
+                            class="text-xs font-bold text-green-500 bg-green-100 dark:bg-green-900/20 px-2 py-0.5 rounded-full">+12%</span>
+                    </div>
+                    <p class="text-2xl font-bold mb-1">245</p>
+                    <p class="text-xs text-muted-light dark:text-muted-dark font-medium uppercase tracking-wide">Visitas
+                        Totales (Mes)</p>
+                </div>
+                <div
+                    class="bg-white dark:bg-background-dark p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                    <div class="flex justify-between items-start mb-4">
+                        <div
+                            class="p-2 bg-purple-100 dark:bg-purple-900/20 rounded-lg text-purple-600 dark:text-purple-400">
+                            <span class="material-icons-outlined">thumb_up</span>
+                        </div>
+                        <span
+                            class="text-xs font-bold text-green-500 bg-green-100 dark:bg-green-900/20 px-2 py-0.5 rounded-full">+5%</span>
+                    </div>
+                    <p class="text-2xl font-bold mb-1">68%</p>
+                    <p class="text-xs text-muted-light dark:text-muted-dark font-medium uppercase tracking-wide">Ratio
+                        de Interés</p>
+                </div>
+                <div
+                    class="bg-white dark:bg-background-dark p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                    <div class="flex justify-between items-start mb-4">
+                        <div
+                            class="p-2 bg-orange-100 dark:bg-orange-900/20 rounded-lg text-orange-600 dark:text-orange-400">
+                            <span class="material-icons-outlined">warning</span>
+                        </div>
+                        <span
+                            class="text-xs font-bold text-red-500 bg-red-100 dark:bg-red-900/20 px-2 py-0.5 rounded-full">-2%</span>
+                    </div>
+                    <p class="text-2xl font-bold mb-1">12</p>
+                    <p class="text-xs text-muted-light dark:text-muted-dark font-medium uppercase tracking-wide">
+                        Clientes en Riesgo</p>
+                </div>
+                <div
+                    class="bg-white dark:bg-background-dark p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                    <div class="flex justify-between items-start mb-4">
+                        <div
+                            class="p-2 bg-emerald-100 dark:bg-emerald-900/20 rounded-lg text-emerald-600 dark:text-emerald-400">
+                            <span class="material-icons-outlined">groups</span>
+                        </div>
+                        <span
+                            class="text-xs font-bold text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-full">--</span>
+                    </div>
+                    <p class="text-2xl font-bold mb-1">8.5</p>
+                    <p class="text-xs text-muted-light dark:text-muted-dark font-medium uppercase tracking-wide">Visitas
+                        Promedio / Rep</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 bg-background-light dark:bg-background-dark relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-6 tracking-tight">¿Quieres probarlo en tu equipo?</h2>
+            <p class="text-xl text-muted-light dark:text-muted-dark mb-10 max-w-2xl mx-auto">
+                Únete a las empresas que ya han automatizado su reporte comercial. Configuración inicial en menos de 24
+                horas.
+            </p>
+            <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input
+                    class="flex-1 appearance-none rounded-full py-4 px-6 bg-surface-light dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-light dark:text-text-dark placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow shadow-sm"
+                    placeholder="Tu correo de trabajo" type="email" />
+                <button
+                    class="bg-primary text-white font-bold py-4 px-8 rounded-full shadow-lg shadow-primary/30 hover:bg-opacity-90 hover:scale-105 transition-all duration-200"
+                    type="button">
+                    Solicitar Acceso
+                </button>
+            </form>
+            <p class="mt-6 text-sm text-muted-light dark:text-muted-dark">
+                <span class="material-icons-outlined text-sm align-middle mr-1">lock</span> Sin tarjeta de crédito
+                requerida. Prueba piloto de 14 días.
+            </p>
+        </div>
+        <div
+            class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-gray-50 to-transparent dark:from-black/20 dark:to-transparent -z-10">
+        </div>
+    </section>
+    <footer class="bg-white dark:bg-background-dark border-t border-gray-100 dark:border-gray-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div
+                class="border-t border-gray-100 dark:border-gray-800 pt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
+                <p>© 2023 Visitrack.es. Todos los derechos reservados.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a class="hover:text-primary transition-colors" href="#">Twitter</a>
+                    <a class="hover:text-primary transition-colors" href="#">LinkedIn</a>
+                    <a class="hover:text-primary transition-colors" href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
