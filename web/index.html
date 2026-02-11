@@ -100,11 +100,7 @@
                     <span class="font-bold text-xl tracking-tight">Visitrack<span class="text-primary">.es</span></span>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#problema">El Problema</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#solucion">Solución</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#como-funciona">Cómo
-                        funciona</a>
-                    <button
+                    <button onclick="document.getElementById('lead-form-section').scrollIntoView({behavior: 'smooth'})"
                         class="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-opacity-90 transition-all shadow-lg shadow-primary/20">
                         Agendar Demo
                     </button>
@@ -153,15 +149,10 @@
                         </li>
                     </ul>
                     <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                        <button
+                        <button onclick="document.getElementById('lead-form-section').scrollIntoView({behavior: 'smooth'})"
                             class="bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold shadow-xl shadow-primary/25 hover:scale-105 transition-transform duration-200 flex items-center justify-center space-x-2">
                             <span>Quiero probarlo</span>
                             <span class="material-icons-outlined text-sm">arrow_forward</span>
-                        </button>
-                        <button
-                            class="bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 text-text-light dark:text-text-dark px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex items-center justify-center space-x-2">
-                            <span class="material-icons-outlined">play_circle_outline</span>
-                            <span>Ver video</span>
                         </button>
                     </div>
                 </div>
@@ -612,7 +603,7 @@
             </div>
         </div>
     </section>
-    <section class="py-24 bg-background-light dark:bg-background-dark relative">
+    <section id="lead-form-section" class="py-24 bg-background-light dark:bg-background-dark relative">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <h2 class="text-4xl lg:text-5xl font-bold mb-6 tracking-tight">¿Quieres probarlo en tu equipo?</h2>
             <p class="text-xl text-muted-light dark:text-muted-dark mb-10 max-w-2xl mx-auto">
@@ -645,11 +636,6 @@
             <div
                 class="border-t border-gray-100 dark:border-gray-800 pt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
                 <p>© 2023 Visitrack.es. Todos los derechos reservados.</p>
-                <div class="flex space-x-4 mt-4 md:mt-0">
-                    <a class="hover:text-primary transition-colors" href="#">Twitter</a>
-                    <a class="hover:text-primary transition-colors" href="#">LinkedIn</a>
-                    <a class="hover:text-primary transition-colors" href="#">Instagram</a>
-                </div>
             </div>
         </div>
     </footer>
