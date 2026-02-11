@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -5,7 +6,7 @@ const path = require('path');
 
 const app = express();
 const PORT = 8000;
-const RESEND_API_KEY = 're_MTXfFrQz_24SAH2Q6btyMbwTmfe6KFtyi';
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const TO_EMAIL = 'juanaco1.p@gmail.com';
 
 // Middleware

@@ -3,3 +3,4 @@ web/node_modules
 .DS_Store
 dist
 .env
+web/.env
